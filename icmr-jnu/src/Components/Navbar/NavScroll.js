@@ -19,7 +19,7 @@ import {
   MDBDropdownItem,
   MDBCollapse,
 } from 'mdb-react-ui-kit';
-import { } from 'mdb-react-ui-kit';
+
 
 
 function NavScroll(props) {
@@ -47,17 +47,17 @@ function NavScroll(props) {
       }}
         className="sticky-top" >
         {/* <nav className={`navbar navbar-expand sticky navbar-${props.Mode} bg-${props.Mode} `}>  */}
-        <nav className={`navbar navbar-expand-lg navbar-${props.Mode} bg-${props.Mode} `}>
+        <nav className={`navbar navbar-expand-lg navbar-${props.Mode} bg-${props.Mode} `}>z
           {/* <nav className={`navbar navbar-expand navbar-${props.Mode} bg-${props.Mode} `}> */}
           <div className="container-fluid">
             {/* <nav ClassName= {`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}> */}
-            <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#defaultNavbar1" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button className="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#defaultNavbar1" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="defaultNavbar1">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item ">
-                  <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+                  <Link className="nav-link" to="/Home">Home <span className="sr-only">(current)</span></Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/About">{props.abouttext}</Link>
@@ -262,25 +262,7 @@ function NavScroll(props) {
   );
 }
 
-// .custom-toggle:hover {
-//   text-decoration: underline;
-// }
 
-
-// function CustomNavbar(props) {
-//   return (
-//     <Navbar style={{ backgroundColor: props.color }} expand="lg">
-//       <Navbar.Brand to="#home">My App</Navbar.Brand>
-//       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-//       <Navbar.Collapse id="basic-navbar-nav">
-//         <Nav className="ml-auto">
-//           <Nav.Link to="#about">About</Nav.Link>
-//           <Nav.Link to="#contact">Contact</Nav.Link>
-//         </Nav>
-//       </Navbar.Collapse>
-//     </Navbar>
-//   );
-// }
 
 
 Navbar.propTypes = {

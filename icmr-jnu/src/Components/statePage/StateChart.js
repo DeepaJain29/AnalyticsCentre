@@ -56,6 +56,7 @@ const StateChart = (props) => {
                 'rgba(153, 102, 255, 0.2)',
                 'rgba(201, 203, 207, 0.2)'
             ],
+
             borderColor: [
                 'rgb(255, 99, 132)',
                 'rgb(255, 159, 64)',
@@ -134,14 +135,15 @@ const StateChart = (props) => {
         maintainAspectRatio: true,
         scales: {
             x: {
-                grid:{display:false}
-              },
+                grid: { display: false }
+            },
             y: {
                 beginAtZero: true,
-                grid:{display:false}
+                grid: { display: false }
             }
         },
         plugins: {
+
             tooltip: {
                 events: ['mousemove'],
                 enabled: true,
@@ -165,11 +167,11 @@ const StateChart = (props) => {
         maintainAspectRatio: true,
         scales: {
             x: {
-                grid:{display:false}
-              },
+                grid: { display: false }
+            },
             y: {
                 beginAtZero: true,
-                grid:{display:false}
+                grid: { display: false }
             }
         },
         plugins: {
@@ -196,14 +198,15 @@ const StateChart = (props) => {
         maintainAspectRatio: true,
         scales: {
             x: {
-                grid:{display:false}
-              },
+                grid: { display: false }
+            },
             y: {
                 beginAtZero: true,
-                grid:{display:false}
+                grid: { display: false }
             }
         },
         plugins: {
+
             tooltip: {
                 events: ['mousemove'],
                 enabled: true,
@@ -225,13 +228,13 @@ const StateChart = (props) => {
     return (
         <>
             <div className="container-fluid pb-4">
-                <div className="row justify-content-center mx-1" 
-                style={{ 
-                    color: props.Mode === 'dark' ? '#e7eaf6' : '#132743',
-                    fontFamily:"URW Chancery L, cursive"
-                }}>
-                    <div className="col-md-4 px-2 my-4" 
-                    style={{boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"}}>
+                <div className="row justify-content-center mx-1"
+                    style={{
+                        color: props.Mode === 'dark' ? '#e7eaf6' : '#132743',
+                        fontFamily: "URW Chancery L, cursive"
+                    }}>
+                    <div className="col-md-4 px-2 my-4"
+                        style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px" }}>
                         <h4 className="text-center"><em>On the basis of Gender</em></h4>
                         <Bar
                             data={genderData}
@@ -240,7 +243,7 @@ const StateChart = (props) => {
                         />
                     </div>
                     <div className="col-md-4 px-2 my-4"
-                    style={{boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"}} >
+                        style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px" }} >
                         <h4 className="text-center"><em>On the basis of Age</em></h4>
                         <Bar
                             data={ageData}
@@ -249,7 +252,7 @@ const StateChart = (props) => {
                         />
                     </div>
 
-                    <div className="col-md-4 my-auto" style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px "}} >
+                    <div className="col-md-4 my-auto" style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px " }} >
                         <h4 className="text-center"><em>On the basis of District</em></h4>
                         <Bar
                             data={DistrictData}

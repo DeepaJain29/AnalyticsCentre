@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Spinner from '../Spinner';
 import CovidMap from './CovidMap';
 import Legend from './Legend';
-import LoadStatesTask from '../../Tasks/LoadStatesTask';
-import LegendItems from '../../Entities/LegendItems';
+import LoadStatesTask from './Tasks/LoadStatesTask';
+import LegendItems from './Entities/LegendItems';
 
 const Covid19 = (props)=> {
     // const [isLoading, setIsLoading] = useState(true)

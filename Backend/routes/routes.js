@@ -9,32 +9,35 @@ const {
     // GENERAL API
     getCount,
     getDescribeTable,
-    getMedicalConditionAllMalignancyCountState,
+    getMedicalConditionAllMalignancyData,
+    getAgeCovid,
+
+
 
     // MALIGNNACY API
-    getMedicalConditionAllMalignancyCount, 
-    getMedicalConditionAllMalignancyData,
-    getMedicalConditionOnlyMalignancyDataCount,
+    
+    
+    
     getMedicalConditionOnlyMalignancyData,
     getMedicalConditionAllMalignancyFeilds,
     getMedicalCondition,
 
     // AGE API
-    getAge, 
-    getAgeRangeMalignancy,
-    getAgeRangeMalignancyState,
+     
+    
+    
 
     // GENDER APIs
     getGender,
     getGenderAllCount,
-    getGenderAllcountCorrect,
+    
     getGenderMCount,
     getGenderFCount,
     getGenderNcount,
     getGenderNoCount,
     getGenderTCount,
     getGender2Count,
-    getGenderCountStateResidence,
+    
 
 
     // ABOUT COVID DATA (WITHOUT TRUENAT)
@@ -50,21 +53,42 @@ const {
 
     // STATE API
     getMedicalConditionAllMalignancyCountStateDistrict,
-    getMedicalConditionAllMalignancyCountStateResidence,
-    getMalignantCountStateResidence
+    
+    
+    
+    // COVID + malignancy +
+    getGenderAllcountCorrectCovidMalignancy,
     
 
 
-} = require ('../controller/controller') 
+} = require ('../controller/general') 
 
+
+const {
+
+    getGenderAllcountCorrect,
+    getMedicalConditionAllMalignancyCount,
+    
+    getMedicalConditionOnlyMalignancyDataCount,
+    getMalignantCountStateResidence,
+    getMedicalConditionAllMalignancyCountStateResidence,
+    getMedicalConditionAllMalignancyCountState,
+    getAge,
+    getAgeRangeMalignancyState,
+    getAgeRangeMalignancy,
+    getGenderCountStateResidence,
+
+
+} = require ('../controller/covMal') 
 
 // GENERAL API
 router.get("/getCount",getCount);
 router.get("/get/Describe/Table",getDescribeTable);
-router.get("/get/MedicalCondition/All/Malignancy/Count/State", getMedicalConditionAllMalignancyCountState),
+router.get("/get/MedicalCondition/All/Malignancy/Count/State", getMedicalConditionAllMalignancyCountState);
+router.get("/get/Age/Covid",getAgeCovid);
 
 
-// MALIGNANCY API
+// MALIGNANCY and COVID API
 router.get("/get/MedicalCondition/All/Malignancy/Count",getMedicalConditionAllMalignancyCount);
 router.get("/get/MedicalCondition/All/Malignancy/Data",getMedicalConditionAllMalignancyData);
 router.get("/get/MedicalCondition/Only/Malignancy/Data/Count",getMedicalConditionOnlyMalignancyDataCount);
@@ -97,7 +121,6 @@ router.get("/get/MedicalCondition/All/Malignancy/Count/State/District", getMedic
 router.get("/get/MedicalCondition/All/Malignancy/Count/State/:state_residence", getMedicalConditionAllMalignancyCountStateResidence);
 // DISTRICT API
 router.get("/get/Malignant/Count/State/:state_residence", getMalignantCountStateResidence);
-// router.get('/get/MedicalCondition/All/Malignancy/Count/State/:state_residence', getMedicalConditionAllMalignancyCountStateResidence);
 
 
 // ABOUT COVID DATA(WITHOUT TRUENAT)
@@ -109,4 +132,7 @@ router.get("/get/Count/covid/Malignancy/Negative",getCountCovidMalignancyNegativ
 router.get("/get/Count/covid/Negative/Malignancy/Negative",getCountCovidNegativeMalignancyNegative);
 
 
+// COVID API
+
+router.get("/get/Gender/All/count/Correct/Covid/Malignancy",getGenderAllcountCorrectCovidMalignancy);
 module.exports=router

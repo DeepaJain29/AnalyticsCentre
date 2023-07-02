@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, GeoJSON } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import "./CovidMap.css";
-import statesIndia from '../../Data/statesIndia.json';
-import LegendItems from '../../Entities/LegendItems';
+import statesIndia from './Data/statesIndia';
+import LegendItems from './Entities/LegendItems';
 
 // const appfeatures = require('../Data/statesIndia.json').features;
 
