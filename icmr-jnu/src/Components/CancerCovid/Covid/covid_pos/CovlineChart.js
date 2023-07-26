@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2';
 const LineChart = () => {
   const [genderChartData, setGenderChartData] = useState([]);
 
-  const genderDataURL = 'http://localhost:4200/get/Gender/All/count/Correct/Covid/Malignancy';
+  const genderDataURL = 'http://localhost:4200/Gender/All/count/Covid/Pos';
 
   useEffect(() => {
     const fetchData = async (url, setData) => {
@@ -111,8 +111,9 @@ const LineChart = () => {
   return (
     <>
       
-        <div style={{ fontFamily: "URW Chancery L, cursive", boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px"}}>
-          <h4 className="text-center"><em>Gender Count by Month and Year</em></h4>
+        <div style={{ fontFamily: "Calibri", boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px", backgroundColor:"white", 
+                borderRadius: "10px"}}>
+          <h4 className="text-center"><em>Gender Count</em></h4>
           <Line data={genderData} height={270} options={chartOptions} />
         </div>
         

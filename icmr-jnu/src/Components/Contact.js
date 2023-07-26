@@ -21,7 +21,7 @@ export default function Contact(props) {
                 <div className='col-lg-8 col-md-12 my-4'>
 
                     <div>
-                        <h3 style={{color: props.Mode === 'dark' ? '#e7eaf6' : '#113f67', fontFamily: "URW Chancery L, cursive" }} className='text-center' >
+                        <h3 style={{color: props.Mode === 'dark' ? '#e7eaf6' : '#113f67', fontFamily: "Calibri" }} className='text-center' >
                             <u>Contact us</u>
                         </h3>
                     </div >
@@ -48,7 +48,7 @@ export default function Contact(props) {
                 <div className='col-lg-4 col-md-12 d-flex justify-content-center align-items-center'>
                     <div 
                         >
-                        <div className="justify-content-center py-auto" style={{fontFamily: "URW Chancery L, cursive" }}>
+                        <div className="justify-content-center py-auto" style={{fontFamily: "Calibri" }}>
                         
                             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3504.040750962232!2d77.214318!3d28.568539000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcfbba37bf655472a!2sV%20Ramalingaswami%20Bhawan!5e0!3m2!1sen!2sin!4v1597922849801!5m2!1sen!2sin" title="myFrame" width="400" height="400" style={{ top: "800px", right: "5px" }}></iframe>
                         </div>

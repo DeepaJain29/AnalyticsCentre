@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PolarArea } from 'react-chartjs-2';
 
-const PieChart = () => {
+const CovPieChart = () => {
 
     const [ageChartData, setAgeChartData] = useState([]);
     const ageDataURL = 'http://localhost:4200/get/Age/Covid';
@@ -100,7 +100,8 @@ const PieChart = () => {
     return (
         <>
             
-                <div style={{ fontFamily: "URW Chancery L, cursive", boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px" }}>
+                <div style={{ fontFamily: "Calibri", boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px" , backgroundColor:"white", 
+                borderRadius: "10px"}}>
                     <h4 className="text-center"><em>Age Count</em></h4>
                     <PolarArea data={ageData} height={220} 
                     options={ageOptions} />
@@ -110,5 +111,5 @@ const PieChart = () => {
     );
 };
 
-export default PieChart;
+export default CovPieChart;
 

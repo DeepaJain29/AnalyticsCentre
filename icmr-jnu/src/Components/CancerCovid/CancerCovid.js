@@ -2,23 +2,24 @@ import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-// import {MDBCarousel, MDBCarouselItem} from 'mdb-react-ui-kit';
 import Covid19 from "../map/Covid19";
 import BarChart from './CovidMalignancy/chart';
-import LineChart from './Covid/covid_pos/lineChart';
-import PieChart from './Covid/covid_pos/AgePie';
-
-
+import CovLineChart from './Covid/covid_pos/CovlineChart';
+import CovPieChart from './Covid/covid_pos/CovAgePie';
+import MalPieChart from './Malignancy/MalAgePie';
+import MalLineChart from './Malignancy/MalLineChart';
 
 export default function CancerCovid(props) {
 
     // to fetch the data of total malignant count
     const totalCount = "http://localhost:4200/get/MedicalCondition/All/Malignancy/Count";
+    const totalCountCovPos = "http://localhost:4200/get/Count/Cov/Pos";
 
     const [conditionCount, setConditionCount] = useState(null);
+    const [countCovPos, setCountCovPos] = useState(null)
 
     useEffect(() => {
-        const fetchData = async (url) => {
+        const fetchData = async (url, setter) => {
             try {
                 const response = await fetch(url, {
                     method: 'GET',
@@ -28,9 +29,9 @@ export default function CancerCovid(props) {
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    setConditionCount(data[0].condition_count);
+                    setter(data[0].count);
                     console.log('Data fetched successfully:', url);
-                    console.log(data);
+                    console.log("chart data is here", data);
                 } else {
                     console.log('Failed to fetch data:', response.error);
                 }
@@ -39,8 +40,9 @@ export default function CancerCovid(props) {
             }
         };
 
-        fetchData(totalCount);
-    }, [totalCount]);
+        fetchData(totalCount, setConditionCount);
+        fetchData(totalCountCovPos, setCountCovPos);
+    }, [totalCount, totalCountCovPos]);
 
 
     // Use this on footer and header = #fb7777
@@ -52,12 +54,12 @@ export default function CancerCovid(props) {
     };
 
     let mystyle = {
-        color: props.Mode === 'dark' ? "#F8F8FF" : "#132743",
-        backgroundColor: props.Mode === 'dark' ? '#132743' : '#F8F8FF',
-
-
-
-
+        color: props.Mode === 'dark' ? "#F8F8FF" : "white",
+        backgroundColor: props.Mode === 'dark' ? '#132743' : '#5b98e3',
+        borderColor: props.Mode === 'dark' ? '#F8F8FF' : 'white',
+        fontFamily: "Calibri",
+        boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+        textAlign: "center"
         // border: " 1px solid " + props.Mode === 'black'? "white" : "black",
         // borderColor:props.Mode ==='dark'?'#b8a9c9':'#622569',
         // border: " 1px solid " ,
@@ -66,164 +68,128 @@ export default function CancerCovid(props) {
 
     return (
         <>
-            <div className="container-fluid px-4 margin-top: 2px">
-                <div style={mystyle} onSelect={handleSelect}>
-                    <Carousel activeIndex={index} onSelect={handleSelect} style={{ minWidth: "100%" }}>
-                        <Carousel.Item >
-                            <Covid19 />
-                        </Carousel.Item>
-                    </Carousel>
+            <div className="container-fluid px-4" style={{
+                backgroundColor: props.Mode === 'dark' ? '#132743' : 'white', paddingTop: "2%",
+                paddingBottom: "2%",
+            }}>
+                <div style={{
+                    backgroundColor: "#EDF2F8", boxShadow: "0 0 0 0px rgba(0, 0, 0, 0.1) inset",
+                    borderRadius: "10px"
+                }}>
+
                     {/* Middle bar */}
-                    <div className='container py-3 square rounded-9 border-2'
-                        style={{ backgroundColor: props.Mode === 'dark' ? '#132743' : '#F8F8FF' }}>
+                    <div className='container py-3 square border-2'
+                    // style={{ backgroundColor: props.Mode === 'dark' ? '#132743' : '#F8F8FF' }}
+                    >
                         <Card className=" mx-2 border-2 "
                             style={{
+                                backgroundColor: props.Mode === 'dark' ? '#24527a' : '#5b98e3',
+                                color: props.Mode === 'dark' ? 'white' : '#F9F0F2',
+                                fontFamily: "Calibri",
                                 borderColor: props.Mode === 'dark' ? '#F8F8FF' : '#F8F8FF',
                                 textAlign: "center",
                             }}>
-                            <Card.Body
-                                style={{
-                                    backgroundColor: props.Mode === 'dark' ? '#24527a' : '#c86b85',
-                                    color: props.Mode === 'dark' ? '#F8F8FF' : '#F9F0F2',
-                                    fontFamily: "URW Chancery L, cursive"
-                                }}>
-                                <h2>Cancer Covid Project</h2></Card.Body>
+                            <h4>Cancer Covid Project</h4>
                         </Card>
                     </div>
 
 
+                    <div class="row">
+                        <div class="col-12 col-md-5"><Carousel activeIndex={index} onSelect={handleSelect} style={{ minWidth: "100%" }}>
+                            <Carousel.Item >
+                                <Covid19 />
+                            </Carousel.Item>
+                        </Carousel></div>
 
+                        <div class="col-12 col-md-7" >
+                            {/* <div className="row">
+                            <div className="col-md py-1" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                <Card style={mystyle} className='rounded mx-2 border-2'>
 
-                    {/* small cards */}
-                    <div className=" container my-2 h-100" >
-                        <div className="container my-3">
+                                    <Card.Title className="text-center" >COVID Cases with Malignancy: {conditionCount}</Card.Title>
 
-                            <div className="row">
-                                <div className="col-md-9" >
-                                    <BarChart />
+                                </Card>
+                            </div>
+                        </div> */}
 
-                                </div>
-                                <div className="col-md-3 px-3 my-3" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>;
-
-
-                                    <Card style={{ width: '18rem', borderColor: props.Mode === 'dark' ? '#F8F8FF' : '#132743', fontFamily: "URW Chancery L, cursive", boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px" }} className='rounded border-3'>
-                                        <Card.Body style={mystyle}>
-                                            <Card.Title className="text-center" >COVID Cases with Malignancy</Card.Title>
-                                            <Card.Subtitle className="mb-2 text-body-secondary text-center danger text-danger">{conditionCount}</Card.Subtitle>
-
-                                        </Card.Body>
+                            <div className="container my-1">
+                                <div className='container py-2 square rounded-9 border-2'
+                                // style={{ backgroundColor: props.Mode === 'dark' ? '#132743' : '#F8F8FF' }}
+                                >
+                                    <Card style={mystyle}
+                                        className='rounded mx-2 border-2'>
+                                        <Card.Title className="text-center">COVID Cases with Malignancy: {conditionCount}</Card.Title>
                                     </Card>
-
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="container my-3">
-                            <div className="col-md-3 px-3 my-3" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>;
+                            <div className='row' >
 
-
-
-
-                                <div className='container py-3 square rounded-9 border-2'
-                                    style={{ backgroundColor: props.Mode === 'dark' ? '#132743' : '#F8F8FF' }}>
-                                    <Card style={{
-                                        borderColor: props.Mode === 'dark' ? '#F8F8FF' : '#132743',
-                                        fontFamily: "URW Chancery L, cursive",
-                                        boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-                                        textAlign: "center"
-                                    }}
-                                        className='rounded mx-2 border-3'>
-                                        <Card.Body style={mystyle}>
-                                            <Card.Title className="text-center" >Positive COVID Cases</Card.Title>
-                                            <Card.Subtitle className="mb-2 text-body-secondary text-center danger text-danger">{conditionCount}</Card.Subtitle>
-
-                                        </Card.Body>
-                                    </Card>
+                                <div className="col-md">
+                                    <div className='px-3'>
+                                        <BarChart />
+                                    </div>
                                 </div>
 
                             </div>
 
-
                         </div>
+                    </div>
 
 
+                    <div className="container-fluid py-2" >
+                        {/* <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop --> */}
+                        <div class="row"
+                        // style= {{backgroundColor:"white"}}
+                        >
 
-                        <div className="container-fluid pb-4">
-                            <div className="row justify-content-around mx-1"
-                                style={{
-                                    color: props.Mode === 'dark' ? '#e7eaf6' : '#132743',
-                                    fontFamily: "URW Chancery L, cursive"
-                                }}>
-                                <div className="col-md-4 px-2 my-4"
+
+                            <div className='col-6'>
+
+                                <div className="container my-2">
+
+                                    <div className='container py-2 square rounded-9 border-2'
                                     >
-                                    
-                                    <LineChart />
+                                        <Card style={mystyle}
+                                            className='rounded mx-2 border-2'>
+                                            <Card.Title className="text-center" >COVID Positive Cases: {countCovPos}</Card.Title>
+                                        </Card>
+                                    </div>
+
                                 </div>
-                                <div className="col-md-4 px-2 my-4">
-                                    
-                                    <PieChart />
+                                <div className='row'>
+                                    <div class="col pb-2"><CovLineChart /></div>
+                                    <div class="col pb-2"><CovPieChart /></div>
+                                </div>
+                            </div>
+
+                            <div className='col-6'>
+
+                                <div className="container my-2">
+
+                                    <div className='container py-2 square rounded-9 border-2'
+                                    >
+                                        <Card style={mystyle}
+                                            className='rounded mx-2 border-2'>
+
+                                            <Card.Title className="text-center" >Malignant Cases: {conditionCount}</Card.Title>
+
+                                        </Card>
+                                    </div>
+
                                 </div>
 
+
+                                <div className='row'>
+                                    <div class="col-md pb-2"><MalLineChart /></div>
+                                    <div class="col-md pb-2"><MalPieChart /></div>
+                                </div>
                             </div>
                         </div>
-
-                        {/* <CardGroup>
-
-                            <Card className=" mx-3 mb-5 square rounded border-2 " style={{ borderColor: props.Mode === 'dark' ? '#F8F8FF' : '#132743' }}>
-
-                                <Card.Body style={mystyle} >
-                                    <Card.Title>Cancer-COVID Project</Card.Title>
-                                    <Card.Text style={{ borderColor: props.Mode === 'dark' ? '#F8F8FF' : '#132743' }}>
-                                        This is a wider card with supporting text below as a natural lead-in
-                                        to additional content. This content is a little bit longer.
-                                    </Card.Text>
-                                </Card.Body>
-                                
-                            </Card>
-
-                            <Card className="mx-3 mb-5 square rounded border-2 border" style={{ borderColor: props.Mode === 'dark' ? '#F8F8FF' : '#132743' }} >
-                                <Card.Img variant="top" src="Images/COVID-19-vaccine_India-Metropolis-Healthcare.jpg" className="my-8 rounded" style={{ height: "200px" }} />
-                                <Card.Body style={mystyle} >
-                                    <Card.Title href="https://vaccine.icmr.org.in/">COVID Vaccine Portal</Card.Title>
-                                    <Card.Text style={{ borderColor: props.Mode === 'dark' ? '#F8F8FF' : '#132743' }}>
-                                        This card has supporting text below as a natural lead-in to
-                                        additional content.{' '}
-                                    </Card.Text>
-                                </Card.Body>
-                                
-                            </Card>
-
-                            <Card className="mx-3 mb-5 square rounded border-2 border" style={{ borderColor: props.Mode === 'dark' ? '#F8F8FF' : '#132743' }} >
-                                <Card.Img variant="top" src="Images/fusion-medical-animation-rnr8D3FNUNY-unsplash.jpg" className="my-8 ronded-top" style={{ height: "200px" }} />
-                                <Card.Body style={mystyle}>
-                                    <Card.Title>Card title</Card.Title>
-                                    <Card.Text style={{ borderColor: props.Mode === 'dark' ? '#F8F8FF' : '#132743' }}>
-                                        This is a wider card with supporting text below as a natural lead-in
-                                        to additional content. This card has even longer content than the
-                                        first to show that equal height action.
-                                    </Card.Text>
-                                </Card.Body>
-                                
-                            </Card>
-
-                            <Card className={`mx-3 mb-5 square rounded border-2 border border-${props.Mode === 'dark' ? "#F8F8FF" : "#132743"}`} style={{ borderColor: props.Mode === 'dark' ? '#F8F8FF' : '#132743' }}>
-                                <Card.Img variant="top" src="Images/fusion-medical-animation-rnr8D3FNUNY-unsplash.jpg" className="my-8" style={{ height: "200px" }} />
-                                <Card.Body style={mystyle}>
-                                    <Card.Title>Card title</Card.Title>
-                                    <Card.Text >
-                                        This is a wider card with supporting text below as a natural lead-in
-                                        to additional content. This card has even longer content than the
-                                        first to show that equal height action.
-                                    </Card.Text>
-                                </Card.Body>
-                                
-                
-                            </Card>
-
-                        </CardGroup> */}
                     </div>
                 </div>
             </div>
         </>
     )
 }
+

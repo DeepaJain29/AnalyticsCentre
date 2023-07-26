@@ -1,4 +1,8 @@
-const db = require("../db/db");
+// DATABASE 2 - covid_pos
+
+
+const db2 = require("../db/db2");
+
 
 // COVID+ MALIGNANCY+
 
@@ -13,7 +17,7 @@ exports.getGenderAllcountCorrect = async (req, res) => {
         // const SQLQuery = 'SELECT gender, COUNT(*) AS count FROM  project1.patientdata WHERE gender NOT IN ("N", "2", "") GROUP BY gender;';
         // const SQLQuery = 'SELECT gender, COUNT(*) AS count FROM  project1.patientdata WHERE gender IN ("M", "F", "T") GROUP BY gender;';
         const SQLQuery = "SELECT gender, COUNT(*) AS count FROM covid_pos.malignance WHERE gender IN ('M', 'F', 'T') GROUP BY gender;";
-        db.query(SQLQuery, (err, result) => {
+        db2.query(SQLQuery, (err, result) => {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ message: 'An error occurred' });
@@ -33,8 +37,8 @@ exports.getGenderAllcountCorrect = async (req, res) => {
 // http://localhost:4200/get/MedicalCondition/All/Malignancy/Count
 exports.getMedicalConditionAllMalignancyCount = async (req, res) => {
     try {
-        const SQLQuery = "SELECT COUNT(*) AS condition_count FROM covid_pos.malignance;";
-        db.query(SQLQuery, (err, result) => {
+        const SQLQuery = "SELECT COUNT(*) AS count FROM covid_pos.malignance;";
+        db2.query(SQLQuery, (err, result) => {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ message: 'An error occurred' });
@@ -57,7 +61,7 @@ exports.getMedicalConditionOnlyMalignancyDataCount = async (req, res) => {
     try {
         const SQLQuery = 'SELECT COUNT(*) FROM covid_pos.malignance WHERE underlying_medical_condition = "Malignancy";';
 
-        db.query(SQLQuery, (err, result) => {
+        db2.query(SQLQuery, (err, result) => {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ message: 'An error occurred' });
@@ -82,7 +86,7 @@ exports.getMalignantCountStateResidence = async (req, res) => {
     try {
         const stateResidence = req.params.state_residence;
         const SQLQuery = "SELECT COUNT(*) AS count, district_residence FROM covid_pos.malignance WHERE state_residence = ? GROUP BY district_residence;";
-        db.query(SQLQuery, [stateResidence], (err, result) => {
+        db2.query(SQLQuery, [stateResidence], (err, result) => {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ message: 'An error occurred' });
@@ -103,7 +107,7 @@ exports.getMedicalConditionAllMalignancyCountStateResidence = async (req, res) =
         const stateResidence = req.params.state_residence;
         const SQLQuery = "SELECT COUNT(*) AS count, state_residence FROM covid_pos.malignance WHERE state_residence = ? GROUP BY state_residence;";
         
-        db.query(SQLQuery, [stateResidence], (err, result) => {
+        db2.query(SQLQuery, [stateResidence], (err, result) => {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ message: 'An error occurred' });
@@ -117,14 +121,15 @@ exports.getMedicalConditionAllMalignancyCountStateResidence = async (req, res) =
 
 
 // 6
+// MAP COVID+ MAL+ STATE COUNT
 // SELECT state_residence, COUNT(*) AS malignancy_count FROM  project1.patientdata WHERE underlying_medical_condition = 'Malignancy' GROUP BY state_residence;
-// http://localhost:4200/get/MedicalCondition/All/Malignancy/Count/State
+// http://localhost:4200/Map/Cov/Mal/State/Count
 // gives the count of malignancy in states covid+, malig+
-exports.getMedicalConditionAllMalignancyCountState = async (req, res) => {
+exports.MapCovMalStateCount = async (req, res) => {
     try {
         // const SQLQuery = "SELECT state_residence, COUNT(*) AS malignancy_count FROM project1.patientdata WHERE underlying_medical_condition IN ('Malignancy', 'Cancer', 'Chemo') GROUP BY state_residence;";
         const SQLQuery = "SELECT state_residence, COUNT(*) AS malignancy_count FROM covid_pos.malignance GROUP BY state_residence;";
-        db.query(SQLQuery, (err, result) => {
+        db2.query(SQLQuery, (err, result) => {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ message: 'An error occurred' });
@@ -146,7 +151,7 @@ exports.getAge = async (req, res) => {
     try {
 
         const SQLQuery = 'select distinct(age) from covid_pos.malignance;';
-        db.query(SQLQuery, (err, result) => {
+        db2.query(SQLQuery, (err, result) => {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ message: 'An error occurred' });
@@ -167,7 +172,7 @@ exports.getAgeRangeMalignancyState = async (req, res) => {
     try {
         const stateResidence = req.params.state_residence;
         const SQLQuery = "SELECT age_range, COUNT(*) AS count FROM (SELECT CASE WHEN age BETWEEN 1 AND 18 THEN '1-18' WHEN age BETWEEN 19 AND 40 THEN '19-40' WHEN age BETWEEN 41 AND 60 THEN '41-60' WHEN age BETWEEN 61 AND 100 THEN '61-100' WHEN age > 100 THEN CONCAT(FLOOR(age / 365), ' years ', MOD(age, 365) DIV 30, ' months ', MOD(age, 30), ' days') END AS age_range, age FROM covid_pos.malignance WHERE age <= 100 AND age IS NOT NULL AND age <> '' AND state_residence = ?) subquery GROUP BY age_range ORDER BY age_range;";
-        db.query(SQLQuery, [stateResidence], (err, result) => {
+        db2.query(SQLQuery, [stateResidence], (err, result) => {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ message: 'An error occurred' });
@@ -187,7 +192,7 @@ exports.getAgeRangeMalignancy = async (req, res) => {
     try {
         const SQLQuery = "SELECT age_range, COUNT(*) AS count FROM (SELECT CASE WHEN age BETWEEN 1 AND 18 THEN '1-18'  WHEN age BETWEEN 19 AND 40 THEN '19-40' WHEN age BETWEEN 41 AND 60 THEN '41-60' WHEN age BETWEEN 61 AND 100 THEN '61-100' WHEN age > 100 THEN CONCAT(FLOOR(age / 365), ' years ', MOD(age, 365) DIV 30, ' months ', MOD(age, 30), ' days') END AS age_range, age FROM covid_pos.malignance WHERE age <= 100 AND age IS NOT NULL AND age <> '') subquery GROUP BY age_range ORDER BY age_range;";
         // const SQLQuery = "SELECT age_range, COUNT(*) AS count FROM ( SELECT CASE WHEN age BETWEEN 1 AND 18 THEN '1-18' WHEN age BETWEEN 19 AND 40 THEN '19-40' WHEN age BETWEEN 41 AND 60 THEN '41-60' WHEN age BETWEEN 61 AND 100 THEN '61-100' WHEN age > 100 THEN CONCAT(FLOOR(age / 365), ' years ', MOD(age, 365) DIV 30, ' months ', MOD(age, 30), ' days') END AS age_range, age FROM project1.patientdata WHERE underlying_medical_condition = 'Malignancy' AND age <= 100 AND age IS NOT NULL) subquery GROUP BY age_range ORDER BY age_range;";
-        db.query(SQLQuery, (err, result) => {
+        db2.query(SQLQuery, (err, result) => {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ message: 'An error occurred', error: err });
@@ -208,7 +213,7 @@ exports.getGenderCountStateResidence = async (req, res) => {
     try {
         const stateResidence = req.params.state_residence;
         const SQLQuery = "SELECT gender, COUNT(*) AS count FROM covid_pos.malignance WHERE gender IN ('M', 'F', 'T') AND state_residence = ? GROUP BY gender;";
-        db.query(SQLQuery, [stateResidence], (err, result) => {
+        db2.query(SQLQuery, [stateResidence], (err, result) => {
             if (err) {
                 console.error('Error executing query:', err);
                 return res.status(500).json({ message: 'An error occurred' });

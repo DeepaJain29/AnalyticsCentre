@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 const CardContainer = styled.div`
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+  
 
   position: relative;
   display: flex;
@@ -13,7 +13,7 @@ const CardContainer = styled.div`
   flex-wrap: wrap;
   gap: 100px 50px;
   padding: 50px 50px;
-  font-family: URW Chancery L, cursive
+  font-family: Calibri, sans-serif
 `;
 
 const Card = styled.div`

@@ -10,10 +10,7 @@ const {
     getCount,
     getDescribeTable,
     getMedicalConditionAllMalignancyData,
-    getAgeCovid,
-
-
-
+    
     // MALIGNNACY API
     
     
@@ -53,16 +50,12 @@ const {
 
     // STATE API
     getMedicalConditionAllMalignancyCountStateDistrict,
-    
-    
-    
-    // COVID + malignancy +
-    getGenderAllcountCorrectCovidMalignancy,
-    
-
 
 } = require ('../controller/general') 
 
+const {getAgeCovid, GenderAllcountCovidPos, getCountCovPos} = require('../controller/covid');
+
+const {GenderCountMal} = require('../controller/malignancy');
 
 const {
 
@@ -72,7 +65,7 @@ const {
     getMedicalConditionOnlyMalignancyDataCount,
     getMalignantCountStateResidence,
     getMedicalConditionAllMalignancyCountStateResidence,
-    getMedicalConditionAllMalignancyCountState,
+    MapCovMalStateCount,
     getAge,
     getAgeRangeMalignancyState,
     getAgeRangeMalignancy,
@@ -84,7 +77,9 @@ const {
 // GENERAL API
 router.get("/getCount",getCount);
 router.get("/get/Describe/Table",getDescribeTable);
-router.get("/get/MedicalCondition/All/Malignancy/Count/State", getMedicalConditionAllMalignancyCountState);
+
+// MAP COVID+ MAL+ STATE COUNT
+router.get("/Map/Cov/Mal/State/Count", MapCovMalStateCount);
 router.get("/get/Age/Covid",getAgeCovid);
 
 
@@ -134,5 +129,14 @@ router.get("/get/Count/covid/Negative/Malignancy/Negative",getCountCovidNegative
 
 // COVID API
 
-router.get("/get/Gender/All/count/Correct/Covid/Malignancy",getGenderAllcountCorrectCovidMalignancy);
+router.get("/Gender/All/count/Covid/Pos",GenderAllcountCovidPos);
+router.get("/get/Count/Cov/Pos",getCountCovPos);
+
+
+
+// MALIGNANCY API
+router.get("/Gender/Count/Mal", GenderCountMal)
+
+
+
 module.exports=router

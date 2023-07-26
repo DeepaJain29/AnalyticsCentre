@@ -26,8 +26,8 @@ export default function App(props) {
   return (
     <MDBFooter className='text-center text-white' 
     style={{ 
-      backgroundColor:props.Mode=== 'dark'?'#24527a':'#c86b85',
-      fontFamily:"URW Chancery L, cursive" 
+      backgroundColor:props.Mode=== 'dark'?'#24527a':'#89b1e3',
+      fontFamily:"Calibri" 
       }}>
       {/* <MDBContainer className='p-4' >
         <section className=''>

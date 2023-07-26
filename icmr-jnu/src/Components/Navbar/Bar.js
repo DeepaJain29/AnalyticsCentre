@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { faMoon } from "@fortawesome/free-solid-svg-icons";
+import { faMoon, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     MDBContainer,
@@ -32,7 +32,7 @@ export default function Bar(props) {
     }
     const [dropdownActive, setDropdownActive] = useState(false);
     const [showBasic, setShowBasic] = useState(false);
-    
+
 
 
     return (
@@ -41,7 +41,7 @@ export default function Bar(props) {
 
 
                 boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
-                fontFamily: "URW Chancery L, cursive",
+                fontFamily: "Calibri",
 
                 color: props.Mode === 'dark' ? "#F8F8FF" : "black"
             }}
@@ -51,9 +51,9 @@ export default function Bar(props) {
                     <MDBContainer fluid>
 
                         <MDBNavbarBrand>
-                            <MDBNavbarLink active aria-current='page' className="nav-link" to="/Home">
+                            <Link active aria-current='page' className="nav-link" to="/Home">
                                 Home
-                            </MDBNavbarLink>
+                            </Link>
                         </MDBNavbarBrand>
 
                         <MDBNavbarToggler
@@ -67,11 +67,9 @@ export default function Bar(props) {
 
                         <MDBCollapse navbar show={showBasic}>
                             <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
-                                <MDBNavbarItem>
+                                <MDBNavbarItem className="nav-item -offset-2 -offset-3-hover -underline -underline-opacity-0 -underline-opacity-75-hover">
 
-                                    <li className="nav-item -offset-2 -offset-3-hover -underline -underline-opacity-0 -underline-opacity-75-hover">
-                                        <Link className="nav-link" to="/About">About</Link >
-                                    </li>
+                                <Link className="nav-link" to="/About">About</Link >
                                 </MDBNavbarItem>
 
 
@@ -206,19 +204,21 @@ export default function Bar(props) {
                                     </MDBDropdown>
                                 </MDBNavbarItem>
 
-                                <li className="nav-item -offset-2 -offset-3-hover -underline -underline-opacity-0 -underline-opacity-75-hover">
-                                    <Link className="nav-link" to="/ContactUs">Contact Us</Link >
-                                </li>
 
+                                <MDBNavbarItem className="nav-item -offset-2 -offset-3-hover -underline -underline-opacity-0 -underline-opacity-75-hover">
+
+                                    
+                                        <Link className="nav-link" to="/ContactUs">Contact us</Link >
+                                    
+                                </MDBNavbarItem>
 
 
                             </MDBNavbarNav>
                             <div className="d-flex">
-                                <FontAwesomeIcon className="my-2 mx-2" onClick={props.toggleMode} icon={faMoon} beat size="lg" style={{ color: "#c86b85", cursor: 'pointer' }} />
+                                <FontAwesomeIcon className="my-2 mx-2" onClick={props.toggleMode} icon={faMoon} beat size="lg" style={{ color: "#5b98e3", cursor: 'pointer' }} />
                                 {/* <div className = " rounded mx-2 my-2" onClick = {props.toggleMode} style={{height:"20px", width:"20px", backgroundColor:'#ffb5b5'}}></div> */}
-                                <button className="btn btn-primary" onClick={props.handleLogout}>
-                                    Logout
-                                </button>
+                                
+                                <FontAwesomeIcon className="my-2 mx-2" onClick={props.handleLogout} icon={faPowerOff} size="lg" />
                             </div>
 
 

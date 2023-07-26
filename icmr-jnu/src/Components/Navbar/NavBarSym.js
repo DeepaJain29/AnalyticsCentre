@@ -11,7 +11,7 @@ export default function NavBarSym(props) {
 
   let mystyle = {
     color: props.Mode === 'dark' ? "#F8F8FF" : "black",
-    backgroundColor: props.Mode === 'dark' ? '#45637d' : '#F8F8FF',
+    backgroundColor: props.Mode === 'dark' ? '#45637d' : '#9fbde3',
     // border: " 1px solid " + props.Mode === 'black'? "white" : "black",
     // borderColor:props.Mode ==='dark'?'#b8a9c9':'#622569',
     // border: " 1px solid " ,
@@ -24,9 +24,9 @@ export default function NavBarSym(props) {
                */}
         <div className="navbar px-my-0 py-0 mx-0 d-flex justify-content-center" 
         style={{ disply: 'flex', justifyContent: 'left', position: 'sticky-top', 
-        backgroundColor: props.Mode === 'dark' ? 'grey' : '#F8F8FF', 
-        borderColor: props.Mode === 'dark' ? '#F8F8FF' : '#132743', 
-        color: props.Mode === 'dark' ? "#F8F8FF" : "black", 
+        backgroundColor: props.Mode === 'dark' ? 'grey' : '#9fbde3', 
+        borderColor: props.Mode === 'dark' ? '#9fbde3' : '#132743', 
+        color: props.Mode === 'dark' ? "#9fbde3" : "black", 
         boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px" }}>
 
 

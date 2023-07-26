@@ -227,14 +227,14 @@ const StateChart = (props) => {
 
     return (
         <>
-            <div className="container-fluid pb-4">
+            <div className="container pb-2">
                 <div className="row justify-content-center mx-1"
                     style={{
-                        color: props.Mode === 'dark' ? '#e7eaf6' : '#132743',
-                        fontFamily: "URW Chancery L, cursive"
+                        color: props.Mode === 'dark' ? 'black' : '#132743',
+                        fontFamily: "Calibri"
                     }}>
                     <div className="col-md-4 px-2 my-4"
-                        style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px" }}>
+                        style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",borderRadius: "10px", backgroundColor:"white" }}>
                         <h4 className="text-center"><em>On the basis of Gender</em></h4>
                         <Bar
                             data={genderData}
@@ -243,7 +243,7 @@ const StateChart = (props) => {
                         />
                     </div>
                     <div className="col-md-4 px-2 my-4"
-                        style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px" }} >
+                        style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px" , borderRadius: "10px", backgroundColor:"white"}} >
                         <h4 className="text-center"><em>On the basis of Age</em></h4>
                         <Bar
                             data={ageData}
@@ -252,7 +252,7 @@ const StateChart = (props) => {
                         />
                     </div>
 
-                    <div className="col-md-4 my-auto" style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px " }} >
+                    <div className="col-md-4 my-auto" style={{ boxShadow: "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px ", borderRadius: "10px", backgroundColor:"white" }} >
                         <h4 className="text-center"><em>On the basis of District</em></h4>
                         <Bar
                             data={DistrictData}

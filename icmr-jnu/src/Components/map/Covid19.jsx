@@ -19,12 +19,12 @@ const Covid19 = (props)=> {
 
     return (
         <>
-            <div className = "container-fluid">
+            <div className = "container-fluid" >
                 
                 {(statesIndia || []).length===0 ? (
                     <Spinner /> 
                     ) : (
-                    <div> 
+                    <div > 
                         <CovidMap statesIndia={statesIndia}/>
                         <Legend LegendItems={LegendItemsInReverse}/>
                     </div>

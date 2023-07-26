@@ -6,6 +6,8 @@ export const Legend = ({LegendItems}) => {
         <div style={{
             display: 'flex',
             alignItems: 'stretch',
+            
+            
             }}>
                 {LegendItems.map((item)=>(
                     <div 
@@ -17,9 +19,10 @@ export const Legend = ({LegendItems}) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         color:item.textColor,
-                        height: "6vh",
-                        fontSize: "1.1em",
+                        height: "5vh",
+                        fontSize: "0.7em",
                         // fontWeight: "bold",
+                        
                         
 
                     }}

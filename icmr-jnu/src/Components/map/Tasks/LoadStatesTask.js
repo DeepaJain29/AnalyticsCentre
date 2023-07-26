@@ -106,7 +106,7 @@ import LegendItems from "../Entities/LegendItems";
 
 class LoadStatesTask {
 
-    Covid19DataUrl = "http://localhost:4200/get/MedicalCondition/All/Malignancy/Count/State";
+    Covid19DataUrl = "http://localhost:4200/Map/Cov/Mal/State/Count";
 
 
 

@@ -1,5 +1,5 @@
 // const { urlencoded } = require("express");
-const db = require("../db/db");
+const db = require("../db/db1");
 
 // GENERAL QUERY STARTS HERE
 
@@ -473,47 +473,5 @@ exports.getMedicalConditionAllMalignancyCountStateDistrict = async (req, res) =>
 
 
 
-// SQL QUERY FOR ONLY COVID positive
-
-
-// http://localhost:4200/get/Gender/All/count/Correct/Covid/Malignancy
-// count of only correct gender from " project1.patientdata" excluding 'N', "", '2'
-exports.getGenderAllcountCorrectCovidMalignancy = async (req, res) => {
-    try {
-
-        // const SQLQuery = 'SELECT gender, COUNT(*) AS count FROM  project1.patientdata WHERE gender NOT IN ("N", "2", "") GROUP BY gender;';
-        // const SQLQuery = 'SELECT gender, COUNT(*) AS count FROM  project1.patientdata WHERE gender IN ("M", "F", "T") GROUP BY gender;';
-        const SQLQuery = "SELECT gender, COUNT(*) AS count, CONCAT(MONTH(entry_date), '-', YEAR(entry_date)) AS month_year FROM (SELECT gender, entry_date FROM covid_pos.NonMalignance UNION ALL SELECT gender, entry_date FROM covid_pos.malignance) AS combined_data WHERE gender IN ('M', 'F', 'T') GROUP BY gender, month_year;";
-        db.query(SQLQuery, (err, result) => {
-            if (err) {
-                console.error('Error executing query:', err);
-                return res.status(500).json({ message: 'An error occurred' });
-            }
-            return res.send(result);
-        });
-    }
-    catch (error) {
-        return res.status(500).json({ message: error.message })
-    }
-};
-
-// http://localhost:4200/get/Age/Covid
-// SQL query to get count the number of age data (present in the "age" column) in a range of every 10  who are malignant (present in column "underlying_medical _condition") in project1.patientdata table. (if age goes above 100 convert it into months and days and then embed in query) excluding unknown values--   project1.patientdata"
-exports.getAgeCovid = async (req, res) => {
-    try {
-        const SQLQuery = "SELECT age_range AS Age, COUNT(*) AS Count FROM (SELECT CASE  WHEN age BETWEEN 1 AND 18 THEN '1-18' WHEN age BETWEEN 19 AND 40 THEN '19-40' WHEN age BETWEEN 41 AND 60 THEN '41-60' WHEN age BETWEEN 61 AND 100 THEN '61-100' WHEN age > 100 THEN CONCAT(FLOOR(age / 365), ' years ', MOD(age, 365) DIV 30, ' months ', MOD(age, 30), ' days') END AS age_range FROM (SELECT age FROM covid_pos.NonMalignance UNION ALL SELECT age FROM project1.patientdata ) AS combined_data WHERE age <= 100 AND age IS NOT NULL AND age <> '' ) AS subquery GROUP BY age_range ORDER BY age_range;";
-        // const SQLQuery = "SELECT age_range, COUNT(*) AS count FROM ( SELECT CASE WHEN age BETWEEN 1 AND 18 THEN '1-18' WHEN age BETWEEN 19 AND 40 THEN '19-40' WHEN age BETWEEN 41 AND 60 THEN '41-60' WHEN age BETWEEN 61 AND 100 THEN '61-100' WHEN age > 100 THEN CONCAT(FLOOR(age / 365), ' years ', MOD(age, 365) DIV 30, ' months ', MOD(age, 30), ' days') END AS age_range, age FROM project1.patientdata WHERE underlying_medical_condition = 'Malignancy' AND age <= 100 AND age IS NOT NULL) subquery GROUP BY age_range ORDER BY age_range;";
-        db.query(SQLQuery, (err, result) => {
-            if (err) {
-                console.error('Error executing query:', err);
-                return res.status(500).json({ message: 'An error occurred', error: err });
-            }
-            return res.send(result);
-        })
-    }
-    catch (error) {
-        return res.status(500).json({ message: error.message })
-    }
-}
 
 // SQL QUERY FOR ONLY MALIGNANCY

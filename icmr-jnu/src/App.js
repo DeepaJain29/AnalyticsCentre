@@ -103,7 +103,7 @@ function App() {
       setMode('light');
       // document.body.style.backgroundColor = '#e7eaf6';
       // document.body.style.backgroundColor = '#F8F8FF';
-      document.body.style.backgroundColor = '#F8F8FF';
+      document.body.style.backgroundColor = 'white';
       // showAlert("Light Mode Enabled", "success" );
       document.title = "ICMR-JNU Analytics Centre - Light"
     }
